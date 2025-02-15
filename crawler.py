@@ -352,7 +352,7 @@ def process_video(video_url: str = Query(...)):
         "title": video_title,
         "content": "",
         "excerpt": video_description,
-        "status": "publish",
+        "status": "draft",
         "categories": [38],
         "meta": {"tie_embed_code": ""}
     }
