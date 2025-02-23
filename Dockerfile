@@ -18,6 +18,7 @@ COPY keys.env ./
 
 # Copy your application code into the container.
 COPY crawler.py ./
+COPY twitter_poster.py ./
 # (If you have additional modules or folders, copy them as well.)
 # COPY other_module.py ./
 

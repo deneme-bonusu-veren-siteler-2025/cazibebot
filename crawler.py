@@ -8,6 +8,7 @@ import time
 from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 from threading import Lock
+from twitter_poster import post_tweet
 
 load_dotenv("keys.env") 
 
@@ -372,8 +373,10 @@ def process_video(video_url: str = Query(...)):
         media_id = upload_thumbnail(LOCAL_THUMBNAIL_PATH, video_title)
         if media_id:
             update_wordpress_post(new_post_id, {"featured_media": media_id})
-        
         return {"status": "success", "video_id": video_id, "post_id": new_post_id}
     finally:
         with processing_lock:
             processing_videos.pop(video_url, None)
+
+        #Post to twitter
+        post_tweet(video_title, video_description, video_download_url, LOCAL_THUMBNAIL_PATH)    
